@@ -32,35 +32,8 @@
   .header-title span{font-style:italic;font-weight:300;color:#a8d4a0;}
   .ronda-badge{font-size:.6rem;background:var(--scuro);color:#a8d4a0;padding:4px 8px;border-radius:2px;letter-spacing:.1em;text-transform:uppercase;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .tabs{display:flex;background:#0f1f0d;border-bottom:1px solid var(--linea);}
-  .tab{flex:1;padding:10px 1px;text-align:center;font-size:.48rem;letter-spacing:.03em;text-transform:uppercase;color:#6a9465;cursor:pointer;border:none;background:none;transition:all .2s;}
+  .tab{flex:1;padding:10px 2px;text-align:center;font-size:.5rem;letter-spacing:.04em;text-transform:uppercase;color:#6a9465;cursor:pointer;border:none;background:none;transition:all .2s;}
   .tab.active{color:var(--bianco);background:var(--verde);border-bottom:2px solid #a8d4a0;}
-  /* Avviso copyright */
-  .cr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;display:flex;align-items:flex-end;justify-content:center;}
-  .cr-box{background:#2a0a0a;border:2px solid #e87070;border-radius:8px 8px 0 0;width:100%;max-width:520px;padding:22px 18px 36px;}
-  .cr-titolo{font-family:'Fraunces',serif;font-size:1.1rem;color:#e87070;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
-  .cr-testo{font-size:.72rem;color:#f5d0d0;line-height:1.8;}
-  .cr-rif{font-size:.62rem;color:#8a4a4a;margin-top:10px;font-style:italic;}
-  /* Mappa totale */
-  .mappa-nome-bar{display:flex;gap:8px;align-items:center;margin-bottom:10px;}
-  .mappa-nome-inp{flex:1;background:#0f1f0d;border:1px solid var(--linea);color:var(--bianco);padding:8px 10px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;border-radius:2px;}
-  .mappa-nome-inp:focus{outline:none;border-color:var(--verdechiaro);}
-  .btn-mappa-refresh{background:#1e3a1a;border:1px solid var(--linea);color:#a8d4a0;padding:8px 10px;border-radius:2px;cursor:pointer;font-size:.9rem;flex-shrink:0;}
-  #mappaTotaleContainer{height:calc(100vh - 280px);min-height:320px;border-radius:4px;overflow:hidden;border:1px solid var(--linea);margin-bottom:10px;}
-  .mappa-legenda{display:flex;gap:12px;flex-wrap:wrap;font-size:.62rem;color:#a8d4a0;padding:8px 10px;background:#0f1f0d;border-radius:3px;margin-bottom:10px;}
-  .legenda-punto{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.4);flex-shrink:0;display:inline-block;}
-  .btn-mappa-stampa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#1a2a4a;color:#a0c8f0;border:1px solid #2a4a7a;padding:12px;font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.06em;cursor:pointer;border-radius:2px;text-transform:uppercase;margin-bottom:8px;}
-  @media print{
-    @page{margin:10mm;size:A4 landscape;}
-    body{background:#fff !important;color:#111 !important;}
-    .header,.tabs,.notif,.btn,button,.screen:not(#schermo-mappaprint),.modal-overlay,.mappa-nome-bar,.btn-mappa-stampa,.btn-mappa-refresh,.mappa-legenda-print-nascondi{display:none !important;}
-    #schermo-mappaprint{display:block !important;padding:0 !important;}
-    .print-mappa-titolo{font-family:Georgia,serif;font-size:14pt;color:#2d5a27;border-bottom:2px solid #2d5a27;padding-bottom:6px;margin-bottom:10px;}
-    .print-mappa-meta{font-size:9pt;color:#555;margin-bottom:8px;line-height:1.6;}
-    #mappaTotalePrint{width:100%;height:160mm;border:1px solid #ccc;border-radius:4px;}
-    .print-legenda-mappa{display:flex;gap:16px;font-size:8pt;color:#333;margin-top:8px;flex-wrap:wrap;}
-    .print-punto{width:10px;height:10px;border-radius:50%;display:inline-block;}
-  }
-  #schermo-mappaprint{display:none;}
   .screen{display:none;padding:16px;}
   .screen.active{display:block;}
   .card{background:#1e3a1a;border:1px solid var(--linea);border-radius:4px;padding:16px;margin-bottom:12px;}
@@ -248,15 +221,12 @@
   <button class="tab" onclick="mostraSchermo('camera')">&#128247; Campo</button>
   <button class="tab" onclick="mostraSchermo('analisi')">&#128300; Analisi</button>
   <button class="tab" onclick="mostraSchermo('panoramica')">&#128203; Rilievo</button>
-  <button class="tab" onclick="mostraSchermo('mappa')">&#128506; Mappa</button>
   <button class="tab" onclick="mostraSchermo('export')">&#8599; Export</button>
 </div>
 
 <!-- INIZIO -->
 <div id="schermo-setup" class="screen active">
   <div class="card">
-    <div class="label">&#128100; Operatore di campo</div>
-    <input type="text" class="inp" id="operatore" placeholder="Nome dell'operatore di campo">
     <div class="label">Localit&#224; / Transetto</div>
     <input type="text" class="inp" id="localitaNome" placeholder="es. Sentiero del Parco km 0-0.5">
     <div class="label">Data rilievo</div>
@@ -380,34 +350,6 @@
   <button class="btn btn-piccolo btn-pericolo" onclick="eliminaRilievo()" style="width:100%;margin-top:8px">&#10005; Elimina rilievo corrente</button>
 </div>
 
-<!-- MAPPA TOTALE -->
-<div id="schermo-mappa" class="screen">
-  <div class="mappa-nome-bar">
-    <input type="text" class="mappa-nome-inp" id="mappaNome" placeholder="Nome area es. Parco del Ticino — SP34 km 12.4">
-    <button class="btn-mappa-refresh" onclick="disegnaMappaTotale()" title="Aggiorna mappa">&#8635;</button>
-  </div>
-  <div class="mappa-legenda mappa-legenda-print-nascondi">
-    <div style="display:flex;align-items:center;gap:5px"><span class="legenda-punto" style="background:#1a5a7a"></span>Non analizzato</div>
-    <div style="display:flex;align-items:center;gap:5px"><span class="legenda-punto" style="background:#e8a020"></span>Analizzato, attende verifica</div>
-    <div style="display:flex;align-items:center;gap:5px"><span class="legenda-punto" style="background:#3a7d34"></span>Pronto &amp; esportato</div>
-  </div>
-  <div id="mappaTotaleContainer"><div class="carta-nessuna" style="height:100%;display:flex;align-items:center;justify-content:center;color:#6a9465;font-size:.75rem;text-align:center"><div>&#128506;<br>Nessun punto GPS disponibile</div></div></div>
-  <button class="btn-mappa-stampa" onclick="stampaMappa()">&#128196; Stampa mappa / salva come PDF</button>
-  <div style="font-size:.65rem;color:#6a9465;text-align:center;margin-top:4px">Seleziona "Orizzontale" e "Salva come PDF" nella finestra di stampa</div>
-</div>
-
-<!-- STAMPA MAPPA -->
-<div id="schermo-mappaprint">
-  <div class="print-mappa-titolo" id="stampaMappaTitolo">RivelazioneVerde — Mappa Totale</div>
-  <div class="print-mappa-meta" id="stampaMappaMeta"></div>
-  <div id="mappaTotalePrint"></div>
-  <div class="print-legenda-mappa">
-    <div class="print-legenda-item"><span class="print-punto" style="background:#1a5a7a"></span> Non analizzato</div>
-    <div class="print-legenda-item"><span class="print-punto" style="background:#e8a020"></span> Analizzato, attende verifica</div>
-    <div class="print-legenda-item"><span class="print-punto" style="background:#3a7d34"></span> Pronto &amp; esportato</div>
-  </div>
-</div>
-
 <div id="schermo-pdf" class="screen"></div>
 <div class="notif" id="notif"></div>
 <div style="text-align:center;padding:18px 16px 28px;font-size:.55rem;color:#2d5a27;letter-spacing:.08em;border-top:1px solid var(--linea);margin-top:8px">
@@ -433,64 +375,25 @@ function chiudiModal(e){if(e.target===document.getElementById('consigliFotoModal
 window.addEventListener('load',function(){
   document.getElementById('dataInput').value=new Date().toISOString().split('T')[0];
   caricaDatiSalvati();aggiornaPanoramica();aggiornaListaCampo();costruisciListaAnalisi();
-  verificaCopyright();
 });
-
-function verificaCopyright(){
-  var sorgente=document.documentElement.outerHTML;
-  var impronta=[
-    'Legge 633/1941',
-    'Convenzione di Berna',
-    'Copyright (c) 2025',
-    'RivelazioneVerde'
-  ];
-  var integro=impronta.every(function(termine){return sorgente.indexOf(termine)!==-1;});
-  if(!integro){mostraAvvisoCopyright();}
-}
-
-function mostraAvvisoCopyright(){
-  var ts=new Date().toISOString();
-  var overlay=document.createElement('div');
-  overlay.className='cr-overlay';
-  overlay.innerHTML=
-    '<div class="cr-box">'+
-    '<div class="cr-titolo">&#9888;&#65039; Avviso sul diritto d\'autore</div>'+
-    '<div class="cr-testo">'+
-    'L\'indicazione del diritto d\'autore di <strong>RivelazioneVerde</strong> '+
-    '\u00e8 stata modificata o rimossa.<br><br>'+
-    'RivelazioneVerde \u00e8 protetto dalla <strong>Legge 633/1941 (Italia)</strong>, '+
-    'dalla <strong>Auteurswet 1912 (Paesi Bassi)</strong> e dalla '+
-    '<strong>Convenzione di Berna</strong>. L\'uso, la modifica o la distribuzione '+
-    'non autorizzati sono <strong>vietati</strong> e possono comportare azioni legali.<br><br>'+
-    'Se ha ottenuto questo software legalmente, ripristini l\'indicazione originale '+
-    'del diritto d\'autore all\'inizio del file.'+
-    '</div>'+
-    '<div class="cr-rif">Rif: RV-'+ts+' &#8212; Questo avviso \u00e8 stato generato all\'apertura dell\'applicazione.</div>'+
-    '</div>';
-  document.body.appendChild(overlay);
-}
 
 function mostraSchermo(nome){
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
   document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
   document.getElementById('schermo-'+nome).classList.add('active');
   var tabs=document.querySelectorAll('.tab');
-  ['setup','camera','analisi','panoramica','mappa','export'].forEach(function(n,i){if(n===nome)tabs[i].classList.add('active');});
+  ['setup','camera','analisi','panoramica','export'].forEach(function(n,i){if(n===nome)tabs[i].classList.add('active');});
   if(nome==='camera'){avviaCamera();aggiornaListaCampo();}else fermaCamera();
   if(nome==='panoramica')aggiornaPanoramica();
   if(nome==='export')aggiornaSchermoExport();
   if(nome==='analisi')costruisciListaAnalisi();
-  if(nome==='mappa')setTimeout(disegnaMappaTotale,100);
 }
 
 function iniziaRilievo(){
   var loc=document.getElementById('localitaNome').value.trim();
   if(!loc){mostraNot('Inserisci il nome della localit\u00e0');return;}
   if(!confirm('Iniziare un nuovo rilievo? I dati correnti saranno eliminati.'))return;
-  stato.rilievo={id:Date.now(),localita:loc,data:document.getElementById('dataInput').value,
-    gps:document.getElementById('gpsDisplay').textContent,
-    numQuadrati:parseInt(document.getElementById('numQuadrati').value)||10,
-    operatore:document.getElementById('operatore').value.trim()||'Sconosciuto'};
+  stato.rilievo={id:Date.now(),localita:loc,data:document.getElementById('dataInput').value,gps:document.getElementById('gpsDisplay').textContent,numQuadrati:parseInt(document.getElementById('numQuadrati').value)||10};
   stato.quadrati=[];salvaStato();
   document.getElementById('rondaLabel').textContent=loc.substring(0,22)+(loc.length>22?'...':'');
   aggiornaContatoreQuadrato();mostraSchermo('camera');mostraNot('Rilievo avviato');
@@ -730,7 +633,7 @@ function creaPDF(){
   var r=stato.rilievo||{localita:'Sconosciuta',data:'',gps:''};
   var ora=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});
   var h='<div class="pdf-intestazione"><h1>RivelazioneVerde &#8212; Rilevamento della Vegetazione</h1>';
-  h+='<div class="pdf-meta"><strong>Localit&#224;:</strong> '+esc(r.localita)+'<br><strong>Data:</strong> '+esc(r.data)+'<br><strong>GPS:</strong> '+esc(r.gps)+'<br>'+(r.operatore?'<strong>Operatore:</strong> '+esc(r.operatore)+'<br>':'')+'<strong>Generato:</strong> '+ora+'<br><strong>Quadrati:</strong> '+stato.quadrati.length+'</div></div>';
+  h+='<div class="pdf-meta"><strong>Localit&#224;:</strong> '+esc(r.localita)+'<br><strong>Data:</strong> '+esc(r.data)+'<br><strong>GPS:</strong> '+esc(r.gps)+'<br><strong>Generato:</strong> '+ora+'<br><strong>Quadrati:</strong> '+stato.quadrati.length+'</div></div>';
   stato.quadrati.forEach(function(q){
     h+='<div class="pdf-plot"><div class="pdf-plot-intestazione">';
     if(q.foto)h+='<img src="'+q.foto+'" class="pdf-foto" alt="Q'+q.nr+'">';
@@ -765,29 +668,28 @@ function creaPDF(){
 function esportaCSV(){
   if(!stato.quadrati.length){mostraNot('Nessun dato');return;}
   var loc=stato.rilievo?stato.rilievo.localita:'',rd=stato.rilievo?stato.rilievo.data:'';
-  var righe=[['Operatore','Localita','Data rilievo','Quadrato nr','Data quadrato','Ora','GPS lat','GPS lon','Regione/tipo','Riferimento scala','Nome scientifico','Nome italiano','Copertura %','Abbondanza','Affidabilita','Certezza %','Domanda botanico','Analizzato con','Impressione generale','Contesto fitosociologico']];
-  var operatore=stato.rilievo?stato.rilievo.operatore||'':'';
+  var righe=[['Localita','Data rilievo','Quadrato nr','Data quadrato','Ora','GPS lat','GPS lon','Regione/tipo','Riferimento scala','Nome scientifico','Nome italiano','Copertura %','Abbondanza','Affidabilita','Certezza %','Domanda botanico','Analizzato con','Impressione generale','Contesto fitosociologico']];
   stato.quadrati.forEach(function(q){
     var dt=q.timestamp?q.timestamp.split('T'):['',''];
-    var ora_t=dt[1]?dt[1].substring(0,5):'';
+    var ora=dt[1]?dt[1].substring(0,5):'';
     var la='',lo='';
     if(q.gps&&q.gps.indexOf(',')!==-1){var gp=q.gps.split(',');la=gp[0].trim();lo=gp[1].trim();}
     var ai=q.analisiAI||'',imp='',fyto='',scala=q.scala||'',regione=q.regione||'';
     if(q.analisi&&!q.analisi.testoLibero&&(q.analisi.specie||[]).length){
       imp=q.analisi.osservazioni||'';fyto=q.analisi.fitosociologia||'';
-      q.analisi.specie.forEach(function(s){righe.push([operatore,loc,rd,q.nr,dt[0],ora_t,la,lo,regione,scala,s.scientifico||'',s.italiano||s.nl||'',s.copertura!=null?s.copertura:'',s.abbondanza||'',s.affidabilita||'',s.certezza!=null?s.certezza:'',s.domanda||'',ai,imp,fyto]);});
+      q.analisi.specie.forEach(function(s){righe.push([loc,rd,q.nr,dt[0],ora,la,lo,regione,scala,s.scientifico||'',s.italiano||s.nl||'',s.copertura!=null?s.copertura:'',s.abbondanza||'',s.affidabilita||'',s.certezza!=null?s.certezza:'',s.domanda||'',ai,imp,fyto]);});
     } else if(q.analisi&&q.analisi.testoLibero){
-      righe.push([operatore,loc,rd,q.nr,dt[0],ora_t,la,lo,regione,scala,'','','','','','','',ai,q.analisi.osservazioni||'','']);
+      righe.push([loc,rd,q.nr,dt[0],ora,la,lo,regione,scala,'','','','','','','',ai,q.analisi.osservazioni||'','']);
     } else {
-      righe.push([operatore,loc,rd,q.nr,dt[0],ora_t,la,lo,regione,scala,'','','','','non ancora analizzato','','','','','']);
+      righe.push([loc,rd,q.nr,dt[0],ora,la,lo,regione,scala,'','','','','non ancora analizzato','','','','','']);
     }
-    righe.push(new Array(20).fill(''));
+    righe.push(new Array(19).fill(''));
   });
   var csv=righe.map(function(r){return r.map(function(c){return '"'+(c+'').replace(/"/g,'""')+'"';}).join(',');}).join('\n');
   var a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));
   a.download='rivelazioneVerde_'+(stato.rilievo?stato.rilievo.data+'_'+stato.rilievo.localita.substring(0,15).replace(/\s/g,'_'):'export')+'.csv';
-  a.click();mostraNot('CSV scaricato \u2713');marcaEsportato();
+  a.click();mostraNot('CSV scaricato \u2713');
 }
 
 function esportaDubbi(){
@@ -826,14 +728,7 @@ function salvaStato(){
 function caricaDatiSalvati(){
   try{
     var r=localStorage.getItem('rv_rilievo'),pm=localStorage.getItem('rv_quadrati_meta');
-    if(r){stato.rilievo=JSON.parse(r);if(stato.rilievo){
-      document.getElementById('localitaNome').value=stato.rilievo.localita||'';
-      document.getElementById('dataInput').value=stato.rilievo.data||'';
-      document.getElementById('gpsDisplay').textContent=stato.rilievo.gps||'Non ancora determinato';
-      document.getElementById('numQuadrati').value=stato.rilievo.numQuadrati||10;
-      document.getElementById('rondaLabel').textContent=stato.rilievo.localita.substring(0,22);
-      if(stato.rilievo.operatore)document.getElementById('operatore').value=stato.rilievo.operatore;
-    }}
+    if(r){stato.rilievo=JSON.parse(r);if(stato.rilievo){document.getElementById('localitaNome').value=stato.rilievo.localita||'';document.getElementById('dataInput').value=stato.rilievo.data||'';document.getElementById('gpsDisplay').textContent=stato.rilievo.gps||'Non ancora determinato';document.getElementById('numQuadrati').value=stato.rilievo.numQuadrati||10;document.getElementById('rondaLabel').textContent=stato.rilievo.localita.substring(0,22);}}
     if(pm){stato.quadrati=JSON.parse(pm).map(function(q,i){if(q.foto==='presente')q.foto=localStorage.getItem('rv_foto_'+i)||null;return q;});}
     aggiornaContatoreQuadrato();
   }catch(e){}
@@ -851,66 +746,6 @@ function eliminaRilievo(){
   localStorage.removeItem('rv_rilievo');localStorage.removeItem('rv_quadrati_meta');
   document.getElementById('rondaLabel').textContent='Nessun rilievo';
   aggiornaPanoramica();mostraNot('Rilievo eliminato');
-}
-
-// ── MAPPA TOTALE ──────────────────────────────────────────────────────────────
-var mappaTotaleObj=null;
-function disegnaMappaTotale(){
-  if(mappaTotaleObj){mappaTotaleObj.remove();mappaTotaleObj=null;}
-  var c=document.getElementById('mappaTotaleContainer');if(!c)return;
-  var quadrati=stato.quadrati.filter(function(q){return q.gps&&q.gps!=='Non ancora determinato'&&q.gps.indexOf(',')!==-1;});
-  if(!quadrati.length){c.innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:#6a9465;font-size:.75rem;text-align:center"><div>&#128506;<br>Nessun punto GPS disponibile.</div></div>';return;}
-  c.innerHTML='';
-  if(typeof L==='undefined'){c.innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:#6a9465;font-size:.75rem">&#9888; Nessuna connessione</div>';return;}
-  mappaTotaleObj=L.map(c,{zoomControl:true,attributionControl:true});
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&#169; OpenStreetMap'}).addTo(mappaTotaleObj);
-  var coords=[];
-  quadrati.forEach(function(q){
-    var pts=q.gps.split(','),lat=parseFloat(pts[0].trim()),lon=parseFloat(pts[1].trim());
-    if(isNaN(lat)||isNaN(lon))return;
-    coords.push([lat,lon]);
-    var colore=q.esportato?'#3a7d34':(q.analisi?'#e8a020':'#1a5a7a');
-    var bordo=q.esportato?'#7dcf75':(q.analisi?'#f5c842':'#70c8e8');
-    var ic=L.divIcon({
-      className:'',
-      html:'<div style="background:'+colore+';color:#fff;border:2px solid '+bordo+';border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:11px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.6)">'+q.nr+'</div>',
-      iconSize:[34,34],iconAnchor:[17,17],popupAnchor:[0,-20]
-    });
-    var stato_txt=q.esportato?'&#10003; Pronto':(q.analisi?'&#9888; Attende verifica':'&#128247; Solo foto');
-    var specie=(!q.analisi||q.analisi.testoLibero)?'—':(q.analisi.specie||[]).slice(0,4).map(function(s){return '<em>'+(s.italiano||s.scientifico)+'</em>';}).join(', ');
-    var popup='<strong>Quadrato '+q.nr+'</strong><br>'+(q.regione?'&#127807; '+q.regione+'<br>':'')+(q.timestamp?q.timestamp.substring(0,10)+' '+q.timestamp.substring(11,16)+'<br>':'')+stato_txt+'<br>'+(specie!=='—'?'<span style="font-size:.9em">'+specie+'</span>':'');
-    L.marker([lat,lon],{icon:ic}).addTo(mappaTotaleObj).bindPopup(popup);
-  });
-  if(coords.length===1)mappaTotaleObj.setView(coords[0],17);
-  else mappaTotaleObj.fitBounds(L.latLngBounds(coords),{padding:[50,50],maxZoom:18});
-  setTimeout(function(){if(mappaTotaleObj)mappaTotaleObj.invalidateSize();},200);
-}
-
-function stampaMappa(){
-  if(!mappaTotaleObj){mostraNot('Disegna prima la mappa');return;}
-  var nome=document.getElementById('mappaNome').value.trim()||'RivelazioneVerde Mappa Totale';
-  var r=stato.rilievo||{localita:'',data:''};
-  var ora=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});
-  document.getElementById('stampaMappaTitolo').textContent='RivelazioneVerde \u2014 '+nome;
-  document.getElementById('stampaMappaMeta').innerHTML=
-    (r.localita?'<strong>Localit\u00e0:</strong> '+esc(r.localita)+'<br>':'')+
-    (r.data?'<strong>Data:</strong> '+esc(r.data)+'<br>':'')+
-    '<strong>Quadrati:</strong> '+stato.quadrati.length+' ('+
-    stato.quadrati.filter(function(q){return q.esportato;}).length+' pronti, '+
-    stato.quadrati.filter(function(q){return !q.esportato&&q.analisi;}).length+' in attesa, '+
-    stato.quadrati.filter(function(q){return !q.analisi;}).length+' non analizzati)<br>'+
-    '<strong>Generato:</strong> '+ora;
-  var printDiv=document.getElementById('mappaTotalePrint');
-  printDiv.innerHTML='';
-  var clone=document.getElementById('mappaTotaleContainer').cloneNode(true);
-  clone.style.height='160mm';clone.style.width='100%';
-  printDiv.appendChild(clone);
-  setTimeout(function(){window.print();},400);
-}
-
-function marcaEsportato(){
-  stato.quadrati.forEach(function(q){if(q.analisi)q.esportato=true;});
-  salvaStato();
 }
 
 function mostraNot(t){var n=document.getElementById('notif');n.textContent=t;n.classList.add('visibile');setTimeout(function(){n.classList.remove('visibile');},2400);}
