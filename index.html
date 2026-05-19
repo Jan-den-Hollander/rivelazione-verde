@@ -3,7 +3,7 @@
   RivelazioneVerde — Strumento di Rilevamento della Vegetazione
   Versione 1.0 — 2025
 ================================================================================
-  Copyright (c) 2025 Jan [ACHTERNAAM INVULLEN]
+  Copyright (c) 2025 Jan den Hollander 
   Tutti i diritti riservati.
 
   Quest'opera è protetta dal diritto d'autore (Legge 633/1941, Italia;
@@ -11,7 +11,7 @@
   È vietata la riproduzione, distribuzione o creazione di opere derivate
   senza esplicito consenso scritto dell'autore.
 
-  Contact: [DUCK.COM EMAIL INVULLEN]
+  Contact: jandenhollander@duck.com 
 ================================================================================
 -->
 <!DOCTYPE html>
@@ -424,7 +424,7 @@
 <div id="schermo-pdf" class="screen"></div>
 <div class="notif" id="notif"></div>
 <div style="text-align:center;padding:18px 16px 28px;font-size:.55rem;color:#2d5a27;letter-spacing:.08em;border-top:1px solid var(--linea);margin-top:8px">
-  &#169; 2025 Jan [ACHTERNAAM] &#8212; RivelazioneVerde v1.0 &#8212; Tutti i diritti riservati.<br>
+  &#169; 2025 Jan den Hollander &#8212; RivelazioneVerde v1.0 &#8212; Tutti i diritti riservati.<br>
   <span style="color:#1e3a1a">L'uso non autorizzato, la copia o la distribuzione non sono consentiti.</span>
 </div>
 
@@ -784,7 +784,7 @@ function creaPDF(){
     }
     h+='</div>';
   });
-  h+='<div class="pdf-footer">RivelazioneVerde v1.0 &#8212; '+ora+' &#8212; &#169; 2025 Jan [ACHTERNAAM]</div>';
+  h+='<div class="pdf-footer">RivelazioneVerde v1.0 &#8212; '+ora+' &#8212; &#169; 2025 Jan den Hollander</div>';
   document.getElementById('schermo-pdf').innerHTML=h;
   setTimeout(function(){window.print();},300);
 }
