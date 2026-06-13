@@ -519,13 +519,41 @@ function condividiFoto(nr){
   if(!q||!q.foto){mostraNot('Nessuna foto');return;}
   var arr=q.foto.split(','),mime=arr[0].match(/:(.*?);/)[1],bstr=atob(arr[1]),n=bstr.length,u=new Uint8Array(n);
   while(n--)u[n]=bstr.charCodeAt(n);
-  var blob=new Blob([u],{type:mime}),file=new File([blob],'quadrato_'+nr+'.jpg',{type:'image/jpeg'});
-  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
-    navigator.share({title:'RivelazioneVerde Q'+nr,text:getPromptPerQuadrato(q),files:[file]}).then(function(){mostraNot('Condiviso \u2713');}).catch(function(e){if(e.name!=='AbortError')mostraNot('Condivisione fallita');});
+  var blob=new Blob([u],{type:'image/jpeg'});
+  // Semplice nome file senza underscore per massima compatibilità Android
+  var file=new File([blob],'q'+nr+'.jpg',{type:'image/jpeg'});
+  var shareData={title:'Q'+nr,text:getPromptPerQuadrato(q),files:[file]};
+  if(navigator.canShare&&navigator.canShare(shareData)){
+    navigator.share(shareData)
+      .then(function(){mostraNot('Condiviso \u2713');})
+      .catch(function(e){
+        if(e.name==='AbortError')return;
+        // Fallback: prova solo con la foto, senza il testo del prompt
+        _condividiSoloFoto(file,nr);
+      });
+  } else if(navigator.canShare&&navigator.canShare({files:[file]})){
+    // Android rifiuta testo+file insieme — condividi solo la foto
+    _condividiSoloFoto(file,nr);
   } else {
-    var url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='quadrato_'+nr+'.jpg';a.click();
+    // Fallback finale: scarica la foto
+    var url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download='q'+nr+'.jpg';a.click();
     mostraNot('Foto scaricata \u2014 aprila nell\'app AI');
   }
+}
+
+function _condividiSoloFoto(file,nr){
+  navigator.share({files:[file]})
+    .then(function(){
+      mostraNot('Foto condivisa \u2713 \u2014 copia il prompt separatamente');
+    })
+    .catch(function(e){
+      if(e.name!=='AbortError'){
+        var url=URL.createObjectURL(file),a=document.createElement('a');
+        a.href=url;a.download='q'+nr+'.jpg';a.click();
+        mostraNot('Foto scaricata \u2014 aprila nell\'app AI');
+      }
+    });
 }
 
 function copiaPrompt(nr){
