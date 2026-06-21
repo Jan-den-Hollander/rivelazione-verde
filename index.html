@@ -1,17 +1,56 @@
 <!--
 ================================================================================
-  RivelazioneVerde — Strumento di Rilevamento della Vegetazione
-  Versione 1.1 — 2025
+  © Jan den Hollander — jandenhollander@duck.com
+  GitHub: https://github.com/Jan-den-Hollander
+  Projectnaam: RivelazioneVerde
+  Versie: 1.1 | Datum: 2026-06-20
+
+  LICENTIE / LICENSE (NL | EN | IT)
+  ──────────────────────────────────────────────────────────────────────────────
+  NL: Dit werk is auteursrechtelijk beschermd. Het mag vrij worden gebruikt,
+  gedeeld en verspreid, uitsluitend voor niet-commerciële doeleinden en
+  uitsluitend in ongewijzigde vorm, met vermelding van de oorspronkelijke
+  auteur. Commercieel gebruik, wijziging, verkoop of integratie in betaalde
+  producten of diensten is uitdrukkelijk verboden zonder schriftelijke
+  toestemming van de auteur. Hulp is en blijft gratis.
+  Het gebruik van naam, projecttitel of enig kenmerkend element van dit werk
+  impliceert geen toestemming van de auteur en vormt bij commercieel gebruik
+  een zelfstandige inbreuk op het auteursrecht.
+
+  EN: This work is protected by copyright. It may be freely used, shared and
+  distributed for non-commercial purposes only, in unmodified form, with
+  attribution to the original author. Commercial use, modification, sale or
+  integration into paid products or services is strictly prohibited without
+  prior written consent of the author. Help is and remains free.
+  The use of the name, project title or any characteristic element of this
+  work does not imply the author's consent and constitutes, in case of
+  commercial use, an independent infringement of copyright.
+
+  IT: Quest'opera è protetta da diritto d'autore. Può essere liberamente
+  utilizzata, condivisa e distribuita esclusivamente per scopi non commerciali,
+  nella sua forma originale e non modificata, con attribuzione all'autore
+  originale. L'uso commerciale, la modifica, la vendita o l'integrazione in
+  prodotti o servizi a pagamento sono espressamente vietati senza il consenso
+  scritto dell'autore. L'aiuto è e rimane gratuito.
+  L'uso del nome, del titolo del progetto o di qualsiasi elemento
+  caratteristico di quest'opera non implica il consenso dell'autore e
+  costituisce, in caso di uso commerciale, una violazione autonoma del
+  diritto d'autore.
+
+  Originele broncode / Original source / Fonte originale:
+  https://github.com/Jan-den-Hollander
+
+  Alle rechten voorbehouden / All rights reserved / Tutti i diritti riservati
+  © Jan den Hollander
 ================================================================================
-  Copyright (c) 2025 Jan den Hollander 
-  Tutti i diritti riservati.
 
-  Quest'opera è protetta dal diritto d'autore (Legge 633/1941, Italia;
-  Auteurswet 1912, Paesi Bassi) e dalla Convenzione di Berna.
-  È vietata la riproduzione, distribuzione o creazione di opere derivate
-  senza esplicito consenso scritto dell'autore.
-
-  Contact: jandenhollander@duck.com 
+  ⚠️  INTEGRITEITSWAARSCHUWING / INTEGRITY NOTICE
+  Dit bestand bevat een integriteitscontrole op projectnaam, footer en modal.
+  Bij verwijdering of wijziging van de copyright-sectie wordt de applicatie
+  automatisch geblokkeerd en wordt verwezen naar de originele broncode.
+  This file contains an integrity check on project name, footer and modal.
+  Removal or modification of the copyright section will automatically disable
+  the application and redirect to the original source code.
 ================================================================================
 -->
 <!DOCTYPE html>
@@ -26,7 +65,7 @@
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap');
   :root{--verde:#2d5a27;--verdechiaro:#4a7c42;--terra:#8b6f47;--bianco:#f5f2eb;--scuro:#1a2e17;--incerto:#e8a020;--certo:#3a7d34;--sconosciuto:#8b4444;--linea:rgba(45,90,39,0.2);}
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'IBM Plex Mono',monospace;background:var(--scuro);color:var(--bianco);min-height:100vh;overflow-x:hidden;}
+  body{font-family:'IBM Plex Mono',monospace;background:var(--scuro);color:var(--bianco);min-height:100vh;overflow-x:hidden;padding-bottom:28px;}
   .header{background:var(--verde);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--verdechiaro);position:sticky;top:0;z-index:100;}
   .header-title{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:600;}
   .header-title span{font-style:italic;font-weight:300;color:#a8d4a0;}
@@ -34,11 +73,6 @@
   .tabs{display:flex;background:#0f1f0d;border-bottom:1px solid var(--linea);}
   .tab{flex:1;padding:8px 1px;text-align:center;font-size:.42rem;letter-spacing:.02em;text-transform:uppercase;color:#6a9465;cursor:pointer;border:none;background:none;transition:all .2s;line-height:1.3;}
   .tab.active{color:var(--bianco);background:var(--verde);border-bottom:2px solid #a8d4a0;}
-  .cr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;display:flex;align-items:flex-end;justify-content:center;}
-  .cr-box{background:#2a0a0a;border:2px solid #e87070;border-radius:8px 8px 0 0;width:100%;max-width:520px;padding:22px 18px 36px;}
-  .cr-titolo{font-family:'Fraunces',serif;font-size:1.1rem;color:#e87070;margin-bottom:10px;}
-  .cr-testo{font-size:.72rem;color:#f5d0d0;line-height:1.8;}
-  .cr-rif{font-size:.62rem;color:#8a4a4a;margin-top:10px;font-style:italic;}
   .mappa-nome-bar{display:flex;gap:8px;align-items:center;margin-bottom:10px;}
   .mappa-nome-inp{flex:1;background:#0f1f0d;border:1px solid var(--linea);color:var(--bianco);padding:8px 10px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;border-radius:2px;}
   .mappa-nome-inp:focus{outline:none;border-color:var(--verdechiaro);}
@@ -132,7 +166,7 @@
   .leaflet-popup-tip{background:#1e3a1a !important;}
   .export-card{background:#1e3a1a;border:1px solid var(--linea);border-radius:4px;padding:16px;margin-bottom:12px;text-align:center;}
   .export-desc{font-size:.7rem;color:#6a9465;line-height:1.6;margin-bottom:12px;}
-  .notif{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--verde);color:var(--bianco);padding:10px 20px;border-radius:4px;font-size:.75rem;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
+  .notif{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--verde);color:var(--bianco);padding:10px 20px;border-radius:4px;font-size:.75rem;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
   .notif.visibile{opacity:1;}
   .divisore{border:none;border-top:1px solid var(--linea);margin:14px 0;}
   .sezione-titolo{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#6a9465;margin-bottom:10px;}
@@ -358,22 +392,13 @@
 
 <div id="schermo-pdf" class="screen"></div>
 <div class="notif" id="notif"></div>
-<div style="text-align:center;padding:18px 16px 28px;font-size:.55rem;color:#2d5a27;letter-spacing:.08em;border-top:1px solid var(--linea);margin-top:8px">
-  &#169; 2025 Jan den Hollander &#8212; RivelazioneVerde v1.1 &#8212; Tutti i diritti riservati.<br>
-  <span style="color:#1e3a1a">L'uso non autorizzato, la copia o la distribuzione non sono consentiti.</span>
-</div>
 
 <script>
 var stato={rilievo:null,quadrati:[],stream:null,fotoCorrente:null};
 
 var PROMPT_BASE='Begin your response with a short introduction line:\n"Analysis by: [your name and version, e.g. Gemini 2.0 Flash / Claude Sonnet 4 / Le Chat Mistral Large]"\n\nYou are an expert botanical field assistant. Analyze this photo of a vegetation plot of exactly 1 m\u00b2.\n\nLocation/region: [REGIONE]\nScale reference visible in photo: [SCALA]\n\nIMPORTANT ITALIAN CONTEXT: Italy has highly diverse vegetation zones. Adapt phytosociological expectations based on the region:\n- Mediterranean south & islands: macchia, garrigue, Quercus ilex, Pistacia, Cistus\n- Po plain & Adriatic: continental grasslands, hygrophilous and ruderal species\n- Alpine/Pre-alpine north: alpine meadows, Carex, Gentiana, Dryas, Sesleria\n- Apennine belt: mixed deciduous, calcareous grasslands\n- Coastal dunes & wetlands: halophytes, psammophytes\n- Urban verges: cosmopolitan ruderal flora\n\nPerform a quadrat analysis by mentally dividing the photo into segments.\n\nProvide a structured list per species:\n\u2022 Scientific name\n\u2022 Italian common name\n\u2022 Estimated cover percentage (%)\n\u2022 Abundance (rare / scarce / frequent / abundant / dominant)\n\u2022 Reliability (0-100% certainty)\n\u2022 Optional determination question for the botanist\n\nGeneral assessment: describe (1) vegetation structure, (2) nutrient/substrate status, (3) phytosociological context (Italian alliance/association).\nAnswer in Italian.';
 
-function getPromptPerQuadrato(q){
-  var r=(q&&q.regione)||document.getElementById('regioneHint').value.trim()||'non specificata';
-  var s=(q&&q.scala)||document.getElementById('riferimentoScala').value.trim()||'nessun riferimento';
-  return PROMPT_BASE.replace('[REGIONE]',r).replace('[SCALA]',s);
-}
-
+function getPromptPerQuadrato(q){var r=(q&&q.regione)||document.getElementById('regioneHint').value.trim()||'non specificata';var s=(q&&q.scala)||document.getElementById('riferimentoScala').value.trim()||'nessun riferimento';return PROMPT_BASE.replace('[REGIONE]',r).replace('[SCALA]',s);}
 function scegliScala(k,v){document.querySelectorAll('.schaal-knop').forEach(function(x){x.classList.remove('actief');});k.classList.add('actief');document.getElementById('riferimentoScala').value=v;}
 function scegliScalaPiede(k){var t=prompt('Taglia scarpe?','43');if(t){document.querySelectorAll('.schaal-knop').forEach(function(x){x.classList.remove('actief');});k.classList.add('actief');document.getElementById('riferimentoScala').value='piede taglia '+t;}}
 function apriModal(){document.getElementById('consigliFotoModal').classList.add('open');}
@@ -383,20 +408,7 @@ function chiudiModal(e){if(e.target===document.getElementById('consigliFotoModal
 window.addEventListener('load',function(){
   document.getElementById('dataInput').value=new Date().toISOString().split('T')[0];
   caricaDatiSalvati();aggiornaPanoramica();aggiornaListaCampo();costruisciListaAnalisi();
-  verificaCopyright();
 });
-
-function verificaCopyright(){
-  var src=document.documentElement.outerHTML;
-  var impr=['Legge 633/1941','Convenzione di Berna','Copyright (c) 2025','RivelazioneVerde'];
-  if(!impr.every(function(t){return src.indexOf(t)!==-1;}))mostraAvvisoCopyright();
-}
-function mostraAvvisoCopyright(){
-  var ts=new Date().toISOString();
-  var o=document.createElement('div');o.className='cr-overlay';
-  o.innerHTML='<div class="cr-box"><div class="cr-titolo">&#9888;&#65039; Avviso sul diritto d\'autore</div><div class="cr-testo">L\'indicazione del diritto d\'autore di <strong>RivelazioneVerde</strong> \u00e8 stata modificata o rimossa.<br><br>Protetto dalla <strong>Legge 633/1941</strong> e dalla <strong>Convenzione di Berna</strong>.</div><div class="cr-rif">Rif: RV-'+ts+'</div></div>';
-  document.body.appendChild(o);
-}
 
 function mostraSchermo(nome){
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
@@ -520,22 +532,13 @@ function condividiFoto(nr){
   var arr=q.foto.split(','),mime=arr[0].match(/:(.*?);/)[1],bstr=atob(arr[1]),n=bstr.length,u=new Uint8Array(n);
   while(n--)u[n]=bstr.charCodeAt(n);
   var blob=new Blob([u],{type:'image/jpeg'});
-  // Semplice nome file senza underscore per massima compatibilità Android
   var file=new File([blob],'q'+nr+'.jpg',{type:'image/jpeg'});
   var shareData={title:'Q'+nr,text:getPromptPerQuadrato(q),files:[file]};
   if(navigator.canShare&&navigator.canShare(shareData)){
-    navigator.share(shareData)
-      .then(function(){mostraNot('Condiviso \u2713');})
-      .catch(function(e){
-        if(e.name==='AbortError')return;
-        // Fallback: prova solo con la foto, senza il testo del prompt
-        _condividiSoloFoto(file,nr);
-      });
+    navigator.share(shareData).then(function(){mostraNot('Condiviso \u2713');}).catch(function(e){if(e.name==='AbortError')return;_condividiSoloFoto(file,nr);});
   } else if(navigator.canShare&&navigator.canShare({files:[file]})){
-    // Android rifiuta testo+file insieme — condividi solo la foto
     _condividiSoloFoto(file,nr);
   } else {
-    // Fallback finale: scarica la foto
     var url=URL.createObjectURL(blob),a=document.createElement('a');
     a.href=url;a.download='q'+nr+'.jpg';a.click();
     mostraNot('Foto scaricata \u2014 aprila nell\'app AI');
@@ -543,17 +546,7 @@ function condividiFoto(nr){
 }
 
 function _condividiSoloFoto(file,nr){
-  navigator.share({files:[file]})
-    .then(function(){
-      mostraNot('Foto condivisa \u2713 \u2014 copia il prompt separatamente');
-    })
-    .catch(function(e){
-      if(e.name!=='AbortError'){
-        var url=URL.createObjectURL(file),a=document.createElement('a');
-        a.href=url;a.download='q'+nr+'.jpg';a.click();
-        mostraNot('Foto scaricata \u2014 aprila nell\'app AI');
-      }
-    });
+  navigator.share({files:[file]}).then(function(){mostraNot('Foto condivisa \u2713 \u2014 copia il prompt separatamente');}).catch(function(e){if(e.name!=='AbortError'){var url=URL.createObjectURL(file),a=document.createElement('a');a.href=url;a.download='q'+nr+'.jpg';a.click();mostraNot('Foto scaricata \u2014 aprila nell\'app AI');}});
 }
 
 function copiaPrompt(nr){
@@ -619,7 +612,6 @@ function risultatoHtml(q){
 
 function esc(t){return(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
-// ── CARTA (panoramica) ────────────────────────────────────────────────────────
 var cartaObj=null;
 function disegnaCarta(){
   if(cartaObj){cartaObj.remove();cartaObj=null;}
@@ -644,7 +636,6 @@ function disegnaCarta(){
   setTimeout(function(){if(cartaObj)cartaObj.invalidateSize();},200);
 }
 
-// ── MAPPA TOTALE ──────────────────────────────────────────────────────────────
 var mappaTotaleObj=null;
 function disegnaMappaTotale(){
   if(mappaTotaleObj){mappaTotaleObj.remove();mappaTotaleObj=null;}
@@ -671,66 +662,21 @@ function disegnaMappaTotale(){
   setTimeout(function(){if(mappaTotaleObj)mappaTotaleObj.invalidateSize();},200);
 }
 
-// ── PDF ───────────────────────────────────────────────────────────────────────
 function creaPDF(){
   if(!stato.quadrati.length){mostraNot('Nessun quadrato');return;}
   var r=stato.rilievo||{localita:'Sconosciuta',data:'',gps:'',operatore:''};
   var ora=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});
-
-  var css=[
-    'body{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10pt;color:#111;background:#fff;margin:0;padding:12mm;}',
-    '@page{margin:15mm 12mm;size:A4;}',
-    '.intestazione{border-bottom:2px solid #2d5a27;padding-bottom:8px;margin-bottom:16px;}',
-    '.intestazione h1{font-family:Georgia,serif;font-size:18pt;color:#2d5a27;margin:0 0 4px 0;}',
-    '.meta{font-size:9pt;color:#555;line-height:1.8;}',
-    '.sez-mappa{margin-bottom:20px;page-break-inside:avoid;}',
-    '.sez-mappa h2{font-family:Georgia,serif;font-size:12pt;color:#2d5a27;margin:0 0 8px 0;border-bottom:1px solid #c8dcc6;padding-bottom:4px;}',
-    '#pdfMappaId{width:100%;height:250px;border:1px solid #ccc;border-radius:4px;}',
-    '.legenda-pdf{display:flex;gap:16px;margin-top:8px;font-size:8pt;color:#555;flex-wrap:wrap;}',
-    '.li{display:flex;align-items:center;gap:5px;}',
-    '.lp{width:11px;height:11px;border-radius:50%;display:inline-block;border:1.5px solid rgba(0,0,0,.2);}',
-    '.quadrato{border:1px solid #ccc;border-radius:4px;padding:12px;margin-bottom:16px;page-break-inside:avoid;}',
-    '.quad-kop{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px;border-bottom:1px solid #e0e0e0;padding-bottom:8px;}',
-    '.quad-foto{width:110px;height:85px;object-fit:cover;border-radius:3px;border:1px solid #ddd;flex-shrink:0;}',
-    '.quad-info h3{font-size:11pt;color:#2d5a27;margin:0 0 4px 0;}',
-    '.quad-info .m{font-size:8.5pt;color:#666;line-height:1.7;}',
-    'table.sp{width:100%;border-collapse:collapse;margin-top:8px;font-size:9pt;}',
-    'table.sp th{background:#f0f5ee;color:#2d5a27;padding:4px 8px;text-align:left;font-size:8pt;border:1px solid #ddd;}',
-    'table.sp td{padding:5px 8px;border:1px solid #eee;vertical-align:top;line-height:1.5;}',
-    'table.sp tr:nth-child(even) td{background:#fafafa;}',
-    '.impressione{margin-top:8px;font-size:9pt;color:#333;background:#f5f9f4;padding:7px 10px;border-left:3px solid #2d5a27;border-radius:0 3px 3px 0;line-height:1.6;}',
-    '.fyto{margin-top:6px;font-size:9pt;color:#555;background:#f9f9e8;padding:7px 10px;border-left:3px solid #8a8a20;border-radius:0 3px 3px 0;line-height:1.6;}',
-    '.testo{margin-top:6px;font-size:9pt;color:#333;line-height:1.7;white-space:pre-wrap;background:#f9f9f9;padding:8px 10px;border-left:3px solid #4a7c42;}',
-    '.nessuno{font-size:9pt;color:#999;font-style:italic;margin-top:6px;}',
-    '.c{display:inline-block;background:#e8f5e9;color:#2d6a24;padding:1px 6px;border-radius:3px;font-size:8pt;}',
-    '.i{display:inline-block;background:#fff3e0;color:#b35c00;padding:1px 6px;border-radius:3px;font-size:8pt;font-weight:bold;}',
-    '.s{display:inline-block;background:#fce4e4;color:#8b0000;padding:1px 6px;border-radius:3px;font-size:8pt;}',
-    '.domanda{font-size:8pt;color:#7a5000;font-style:italic;}',
-    '.footer{text-align:center;font-size:8pt;color:#aaa;margin-top:20px;border-top:1px solid #eee;padding-top:8px;}'
-  ].join('');
-
+  var css=['body{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10pt;color:#111;background:#fff;margin:0;padding:12mm;}','@page{margin:15mm 12mm;size:A4;}','.intestazione{border-bottom:2px solid #2d5a27;padding-bottom:8px;margin-bottom:16px;}','.intestazione h1{font-family:Georgia,serif;font-size:18pt;color:#2d5a27;margin:0 0 4px 0;}','.meta{font-size:9pt;color:#555;line-height:1.8;}','.sez-mappa{margin-bottom:20px;page-break-inside:avoid;}','.sez-mappa h2{font-family:Georgia,serif;font-size:12pt;color:#2d5a27;margin:0 0 8px 0;border-bottom:1px solid #c8dcc6;padding-bottom:4px;}','#pdfMappaId{width:100%;height:250px;border:1px solid #ccc;border-radius:4px;}','.legenda-pdf{display:flex;gap:16px;margin-top:8px;font-size:8pt;color:#555;flex-wrap:wrap;}','.li{display:flex;align-items:center;gap:5px;}','.lp{width:11px;height:11px;border-radius:50%;display:inline-block;border:1.5px solid rgba(0,0,0,.2);}','.quadrato{border:1px solid #ccc;border-radius:4px;padding:12px;margin-bottom:16px;page-break-inside:avoid;}','.quad-kop{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px;border-bottom:1px solid #e0e0e0;padding-bottom:8px;}','.quad-foto{width:110px;height:85px;object-fit:cover;border-radius:3px;border:1px solid #ddd;flex-shrink:0;}','.quad-info h3{font-size:11pt;color:#2d5a27;margin:0 0 4px 0;}','.quad-info .m{font-size:8.5pt;color:#666;line-height:1.7;}','table.sp{width:100%;border-collapse:collapse;margin-top:8px;font-size:9pt;}','table.sp th{background:#f0f5ee;color:#2d5a27;padding:4px 8px;text-align:left;font-size:8pt;border:1px solid #ddd;}','table.sp td{padding:5px 8px;border:1px solid #eee;vertical-align:top;line-height:1.5;}','table.sp tr:nth-child(even) td{background:#fafafa;}','.impressione{margin-top:8px;font-size:9pt;color:#333;background:#f5f9f4;padding:7px 10px;border-left:3px solid #2d5a27;border-radius:0 3px 3px 0;line-height:1.6;}','.fyto{margin-top:6px;font-size:9pt;color:#555;background:#f9f9e8;padding:7px 10px;border-left:3px solid #8a8a20;border-radius:0 3px 3px 0;line-height:1.6;}','.testo{margin-top:6px;font-size:9pt;color:#333;line-height:1.7;white-space:pre-wrap;background:#f9f9f9;padding:8px 10px;border-left:3px solid #4a7c42;}','.nessuno{font-size:9pt;color:#999;font-style:italic;margin-top:6px;}','.c{display:inline-block;background:#e8f5e9;color:#2d6a24;padding:1px 6px;border-radius:3px;font-size:8pt;}','.i{display:inline-block;background:#fff3e0;color:#b35c00;padding:1px 6px;border-radius:3px;font-size:8pt;font-weight:bold;}','.s{display:inline-block;background:#fce4e4;color:#8b0000;padding:1px 6px;border-radius:3px;font-size:8pt;}','.domanda{font-size:8pt;color:#7a5000;font-style:italic;}','.footer{text-align:center;font-size:8pt;color:#aaa;margin-top:20px;border-top:1px solid #eee;padding-top:8px;}'].join('');
   var body='<div class="intestazione"><h1>RivelazioneVerde \u2014 Rilevamento della Vegetazione</h1>';
   body+='<div class="meta"><strong>Localit\u00e0:</strong> '+esc(r.localita)+'<br><strong>Data:</strong> '+esc(r.data)+'<br>';
   if(r.gps&&r.gps!=='Non ancora determinato')body+='<strong>GPS partenza:</strong> '+esc(r.gps)+'<br>';
   if(r.operatore)body+='<strong>Operatore:</strong> '+esc(r.operatore)+'<br>';
   body+='<strong>Generato:</strong> '+ora+'<br><strong>Quadrati:</strong> '+stato.quadrati.length+'</div></div>';
-
-  // Mappa di sintesi — Leaflet viene ricreato nel popup
   var gpsPunti=stato.quadrati.filter(function(q){return q.gps&&q.gps!=='Non ancora determinato'&&q.gps.indexOf(',')!==-1;});
   body+='<div class="sez-mappa"><h2>&#128506; Mappa di sintesi \u2014 posizione dei quadrati</h2>';
-  if(gpsPunti.length){
-    body+='<div id="pdfMappaId"></div>';
-    body+='<div class="legenda-pdf">';
-    body+='<div class="li"><div class="lp" style="background:#1a5a7a"></div> Non analizzato</div>';
-    body+='<div class="li"><div class="lp" style="background:#e8a020"></div> Analizzato, in attesa</div>';
-    body+='<div class="li"><div class="lp" style="background:#3a7d34"></div> Pronto &amp; esportato</div>';
-    body+='</div>';
-  } else {
-    body+='<p style="font-size:9pt;color:#999;font-style:italic">Nessun dato GPS disponibile per la mappa.</p>';
-  }
+  if(gpsPunti.length){body+='<div id="pdfMappaId"></div>';body+='<div class="legenda-pdf"><div class="li"><div class="lp" style="background:#1a5a7a"></div> Non analizzato</div><div class="li"><div class="lp" style="background:#e8a020"></div> Analizzato, in attesa</div><div class="li"><div class="lp" style="background:#3a7d34"></div> Pronto &amp; esportato</div></div>';}
+  else{body+='<p style="font-size:9pt;color:#999;font-style:italic">Nessun dato GPS disponibile per la mappa.</p>';}
   body+='</div>';
-
-  // Quadrati
   stato.quadrati.forEach(function(q){
     body+='<div class="quadrato"><div class="quad-kop">';
     if(q.foto)body+='<img src="'+q.foto+'" class="quad-foto" alt="Q'+q.nr+'">';
@@ -746,10 +692,7 @@ function creaPDF(){
     else{
       if(q.analisi.specie&&q.analisi.specie.length){
         body+='<table class="sp"><thead><tr><th>Nome scientifico</th><th>Nome italiano</th><th>Copertura&nbsp;%</th><th>Abbondanza</th><th>Affidabilit\u00e0</th><th>Domanda per il botanico</th></tr></thead><tbody>';
-        q.analisi.specie.forEach(function(s){
-          var bd=s.affidabilita==='certo'?'<span class="c">certo</span>':s.affidabilita==='incerto'?'<span class="i">incerto</span>':'<span class="s">sconosciuto</span>';
-          body+='<tr><td><em>'+esc(s.scientifico||'\u2014')+'</em></td><td>'+esc(s.italiano||s.nl||'\u2014')+'</td><td>'+(s.copertura!=null?s.copertura+'%':'\u2014')+'</td><td>'+esc(s.abbondanza||'\u2014')+'</td><td>'+bd+(s.certezza!=null?' ('+s.certezza+'%)':'')+'</td><td class="domanda">'+esc(s.domanda||'')+'</td></tr>';
-        });
+        q.analisi.specie.forEach(function(s){var bd=s.affidabilita==='certo'?'<span class="c">certo</span>':s.affidabilita==='incerto'?'<span class="i">incerto</span>':'<span class="s">sconosciuto</span>';body+='<tr><td><em>'+esc(s.scientifico||'\u2014')+'</em></td><td>'+esc(s.italiano||s.nl||'\u2014')+'</td><td>'+(s.copertura!=null?s.copertura+'%':'\u2014')+'</td><td>'+esc(s.abbondanza||'\u2014')+'</td><td>'+bd+(s.certezza!=null?' ('+s.certezza+'%)':'')+'</td><td class="domanda">'+esc(s.domanda||'')+'</td></tr>';});
         body+='</tbody></table>';
       }
       if(q.analisi.osservazioni)body+='<div class="impressione"><strong>Impressione generale:</strong> '+esc(q.analisi.osservazioni)+'</div>';
@@ -757,123 +700,26 @@ function creaPDF(){
     }
     body+='</div>';
   });
-
-  body+='<div class="footer">RivelazioneVerde v1.1 \u2014 '+ora+' \u2014 \u00a9 2025 Jan den Hollander</div>';
-
-  // GPS data als JSON meegeven aan de popup
-  var gpsData=JSON.stringify(stato.quadrati.map(function(q){
-    return{nr:q.nr,gps:q.gps||'',regione:q.regione||'',esportato:q.esportato||false,analisi:!!q.analisi};
-  }));
-
+  body+='<div class="footer">RivelazioneVerde v1.1 \u2014 '+ora+' \u2014 \u00a9 2026 Jan den Hollander</div>';
+  var gpsData=JSON.stringify(stato.quadrati.map(function(q){return{nr:q.nr,gps:q.gps||'',regione:q.regione||'',esportato:q.esportato||false,analisi:!!q.analisi};}));
   var win=window.open('','_blank','width=900,height=700');
   if(!win){mostraNot('Popup bloccato \u2014 consenti i popup nel browser');return;}
-  win.document.write(
-    '<!DOCTYPE html><html lang="it"><head>'+
-    '<meta charset="UTF-8">'+
-    '<title>RivelazioneVerde PDF \u2014 '+esc(r.localita)+'</title>'+
-    '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>'+
-    '<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>'+
-    '<style>'+css+'</style>'+
-    '</head><body>'+body+
-    '<script>'+
-    'window.onload=function(){'+
-    '  var quadrati='+gpsData+';'+
-    '  var mappaDiv=document.getElementById("pdfMappaId");'+
-    '  var gps=quadrati.filter(function(q){return q.gps&&q.gps.indexOf(",")!==-1;});'+
-    '  if(gps.length>0&&mappaDiv&&typeof L!=="undefined"){'+
-    '    var k=L.map("pdfMappaId",{zoomControl:false,attributionControl:false});'+
-    '    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19}).addTo(k);'+
-    '    var coords=[];'+
-    '    gps.forEach(function(q){'+
-    '      var pts=q.gps.split(","),lat=parseFloat(pts[0]),lon=parseFloat(pts[1]);'+
-    '      if(!isNaN(lat)&&!isNaN(lon)){'+
-    '        coords.push([lat,lon]);'+
-    '        var kl=q.esportato?"#3a7d34":(q.analisi?"#e8a020":"#1a5a7a");'+
-    '        var ic=L.divIcon({className:"",html:"<div style=\\"background:"+kl+";color:#fff;border:2px solid #fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:10px;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.4)\\">"+q.nr+"</div>",iconSize:[28,28],iconAnchor:[14,14]});'+
-    '        L.marker([lat,lon],{icon:ic}).addTo(k);'+
-    '      }'+
-    '    });'+
-    '    if(coords.length===1)k.setView(coords[0],16);'+
-    '    else k.fitBounds(L.latLngBounds(coords),{padding:[20,20]});'+
-    '    setTimeout(function(){k.invalidateSize();},200);'+
-    '  }'+
-    '  setTimeout(function(){window.print();},1200);'+
-    '};'+
-    '<\/script>'+
-    '</body></html>'
-  );
+  win.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><title>RivelazioneVerde PDF \u2014 '+esc(r.localita)+'</title><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script><style>'+css+'</style></head><body>'+body+'<script>window.onload=function(){var quadrati='+gpsData+';var mappaDiv=document.getElementById("pdfMappaId");var gps=quadrati.filter(function(q){return q.gps&&q.gps.indexOf(",")!==-1;});if(gps.length>0&&mappaDiv&&typeof L!=="undefined"){var k=L.map("pdfMappaId",{zoomControl:false,attributionControl:false});L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19}).addTo(k);var coords=[];gps.forEach(function(q){var pts=q.gps.split(","),lat=parseFloat(pts[0]),lon=parseFloat(pts[1]);if(!isNaN(lat)&&!isNaN(lon)){coords.push([lat,lon]);var kl=q.esportato?"#3a7d34":(q.analisi?"#e8a020":"#1a5a7a");var ic=L.divIcon({className:"",html:"<div style=\\"background:"+kl+";color:#fff;border:2px solid #fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:10px;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.4)\\">"+q.nr+"</div>",iconSize:[28,28],iconAnchor:[14,14]});L.marker([lat,lon],{icon:ic}).addTo(k);}});if(coords.length===1)k.setView(coords[0],16);else k.fitBounds(L.latLngBounds(coords),{padding:[20,20]});setTimeout(function(){k.invalidateSize();},200);}setTimeout(function(){window.print();},1200);};<\/script></body></html>');
   win.document.close();
   marcaEsportato();
 }
 
-// ── STAMPA MAPPA TOTALE ───────────────────────────────────────────────────────
 function stampaMappa(){
   var r=stato.rilievo||{localita:'',data:'',operatore:''};
   var ora=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});
   var nome=document.getElementById('mappaNome')?document.getElementById('mappaNome').value.trim()||'RivelazioneVerde Mappa Totale':'RivelazioneVerde Mappa Totale';
-
   var quadrati=stato.quadrati.filter(function(q){return q.gps&&q.gps!=='Non ancora determinato'&&q.gps.indexOf(',')!==-1;});
-
-  var gpsData=JSON.stringify(quadrati.map(function(q){
-    return{nr:q.nr,gps:q.gps||'',esportato:q.esportato||false,analisi:!!q.analisi,regione:q.regione||''};
-  }));
-
-  var css=[
-    '@page{margin:10mm;size:A4 landscape;}',
-    'body{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10pt;color:#111;background:#fff;margin:0;padding:8mm;}',
-    'h1{font-family:Georgia,serif;font-size:14pt;color:#2d5a27;border-bottom:2px solid #2d5a27;padding-bottom:6px;margin-bottom:8px;}',
-    '.meta{font-size:9pt;color:#555;margin-bottom:10px;line-height:1.6;}',
-    '#mappaPrint{width:100%;height:160mm;border:1px solid #ccc;border-radius:4px;}',
-    '.legenda{display:flex;gap:16px;font-size:8pt;color:#333;margin-top:8px;flex-wrap:wrap;}',
-    '.li{display:flex;align-items:center;gap:4px;}',
-    '.lp{width:10px;height:10px;border-radius:50%;display:inline-block;}'
-  ].join('');
-
-  var metaHtml=(r.operatore?'<strong>Operatore:</strong> '+r.operatore+'<br>':'')+
-    (r.localita?'<strong>Localit\u00e0:</strong> '+r.localita+'<br>':'')+
-    (r.data?'<strong>Data:</strong> '+r.data+'<br>':'')+
-    '<strong>Quadrati:</strong> '+stato.quadrati.length+' | <strong>Generato:</strong> '+ora;
-
+  var gpsData=JSON.stringify(quadrati.map(function(q){return{nr:q.nr,gps:q.gps||'',esportato:q.esportato||false,analisi:!!q.analisi,regione:q.regione||''};}));
+  var css=['@page{margin:10mm;size:A4 landscape;}','body{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10pt;color:#111;background:#fff;margin:0;padding:8mm;}','h1{font-family:Georgia,serif;font-size:14pt;color:#2d5a27;border-bottom:2px solid #2d5a27;padding-bottom:6px;margin-bottom:8px;}','.meta{font-size:9pt;color:#555;margin-bottom:10px;line-height:1.6;}','#mappaPrint{width:100%;height:160mm;border:1px solid #ccc;border-radius:4px;}','.legenda{display:flex;gap:16px;font-size:8pt;color:#333;margin-top:8px;flex-wrap:wrap;}','.li{display:flex;align-items:center;gap:4px;}','.lp{width:10px;height:10px;border-radius:50%;display:inline-block;}'].join('');
+  var metaHtml=(r.operatore?'<strong>Operatore:</strong> '+r.operatore+'<br>':'')+(r.localita?'<strong>Localit\u00e0:</strong> '+r.localita+'<br>':'')+(r.data?'<strong>Data:</strong> '+r.data+'<br>':'')+'<strong>Quadrati:</strong> '+stato.quadrati.length+' | <strong>Generato:</strong> '+ora;
   var win=window.open('','_blank','width=1000,height=700');
   if(!win){mostraNot('Popup bloccato \u2014 consenti i popup');return;}
-  win.document.write(
-    '<!DOCTYPE html><html lang="it"><head>'+
-    '<meta charset="UTF-8"><title>RivelazioneVerde Mappa \u2014 '+nome+'</title>'+
-    '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>'+
-    '<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>'+
-    '<style>'+css+'</style></head><body>'+
-    '<h1>RivelazioneVerde \u2014 '+nome+'</h1>'+
-    '<div class="meta">'+metaHtml+'</div>'+
-    '<div id="mappaPrint"></div>'+
-    '<div class="legenda">'+
-    '<div class="li"><div class="lp" style="background:#1a5a7a"></div> Non analizzato</div>'+
-    '<div class="li"><div class="lp" style="background:#e8a020"></div> Analizzato, in attesa</div>'+
-    '<div class="li"><div class="lp" style="background:#3a7d34"></div> Pronto &amp; esportato</div>'+
-    '</div>'+
-    '<script>'+
-    'window.onload=function(){'+
-    '  var qs='+gpsData+';'+
-    '  var k=L.map("mappaPrint",{zoomControl:false,attributionControl:false});'+
-    '  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19}).addTo(k);'+
-    '  var coords=[];'+
-    '  qs.forEach(function(q){'+
-    '    var pts=q.gps.split(","),lat=parseFloat(pts[0]),lon=parseFloat(pts[1]);'+
-    '    if(!isNaN(lat)&&!isNaN(lon)){'+
-    '      coords.push([lat,lon]);'+
-    '      var kl=q.esportato?"#3a7d34":(q.analisi?"#e8a020":"#1a5a7a");'+
-    '      var rand=q.esportato?"#7dcf75":(q.analisi?"#f5c842":"#70c8e8");'+
-    '      var ic=L.divIcon({className:"",html:"<div style=\\"background:"+kl+";color:#fff;border:2px solid "+rand+";border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:11px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,.5)\\">"+q.nr+"</div>",iconSize:[32,32],iconAnchor:[16,16]});'+
-    '      L.marker([lat,lon],{icon:ic}).addTo(k).bindTooltip(q.nr.toString());'+
-    '    }'+
-    '  });'+
-    '  if(coords.length===1)k.setView(coords[0],17);'+
-    '  else if(coords.length>1)k.fitBounds(L.latLngBounds(coords),{padding:[30,30]});'+
-    '  setTimeout(function(){k.invalidateSize();},300);'+
-    '  setTimeout(function(){window.print();},1200);'+
-    '};'+
-    '<\/script>'+
-    '</body></html>'
-  );
+  win.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><title>RivelazioneVerde Mappa \u2014 '+nome+'</title><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script><style>'+css+'</style></head><body><h1>RivelazioneVerde \u2014 '+nome+'</h1><div class="meta">'+metaHtml+'</div><div id="mappaPrint"></div><div class="legenda"><div class="li"><div class="lp" style="background:#1a5a7a"></div> Non analizzato</div><div class="li"><div class="lp" style="background:#e8a020"></div> Analizzato, in attesa</div><div class="li"><div class="lp" style="background:#3a7d34"></div> Pronto &amp; esportato</div></div><script>window.onload=function(){var qs='+gpsData+';var k=L.map("mappaPrint",{zoomControl:false,attributionControl:false});L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19}).addTo(k);var coords=[];qs.forEach(function(q){var pts=q.gps.split(","),lat=parseFloat(pts[0]),lon=parseFloat(pts[1]);if(!isNaN(lat)&&!isNaN(lon)){coords.push([lat,lon]);var kl=q.esportato?"#3a7d34":(q.analisi?"#e8a020":"#1a5a7a");var rand=q.esportato?"#7dcf75":(q.analisi?"#f5c842":"#70c8e8");var ic=L.divIcon({className:"",html:"<div style=\\"background:"+kl+";color:#fff;border:2px solid "+rand+";border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:11px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,.5)\\">"+q.nr+"</div>",iconSize:[32,32],iconAnchor:[16,16]});L.marker([lat,lon],{icon:ic}).addTo(k).bindTooltip(q.nr.toString());}});if(coords.length===1)k.setView(coords[0],17);else if(coords.length>1)k.fitBounds(L.latLngBounds(coords),{padding:[30,30]});setTimeout(function(){k.invalidateSize();},300);setTimeout(function(){window.print();},1200);};<\/script></body></html>');
   win.document.close();
 }
 
@@ -999,5 +845,171 @@ function eliminaRilievo(){
 
 function mostraNot(t){var n=document.getElementById('notif');n.textContent=t;n.classList.add('visibile');setTimeout(function(){n.classList.remove('visibile');},2400);}
 </script>
+
+<!-- ① ZICHTBARE FOOTER -->
+<div id="jdh-copyright-footer" style="
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.82);
+  color: #ccc;
+  font-size: 11px;
+  text-align: center;
+  padding: 4px 8px;
+  z-index: 99999;
+  font-family: sans-serif;
+  letter-spacing: 0.3px;
+  user-select: none;
+">
+  © <span id="jdh-year"></span> Jan den Hollander &nbsp;|&nbsp;
+  <span id="jdh-project-title" style="color:#7eb8f7"></span> &nbsp;|&nbsp;
+  Vrij gebruik · niet-commercieel · ongewijzigd &nbsp;|&nbsp;
+  <span style="color:#aaa; cursor:pointer; text-decoration:underline"
+        onclick="document.getElementById('jdh-modal').style.display='flex'">
+    ℹ️ Licentie
+  </span>
+</div>
+
+<!-- ② LICENTIE MODAL -->
+<div id="jdh-modal" style="
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.7);
+  z-index:999999;
+  align-items:center; justify-content:center;
+">
+  <div style="
+    background:#1a1a2e; color:#e0e0e0;
+    border:1px solid #444; border-radius:10px;
+    max-width:480px; width:90%; padding:24px;
+    font-family:sans-serif; font-size:13px; line-height:1.6;
+  ">
+    <h3 style="color:#7eb8f7; margin-top:0">
+      © Jan den Hollander &nbsp;·&nbsp;
+      <span id="jdh-modal-title" style="font-weight:normal;font-size:12px"></span>
+    </h3>
+    <p>Dit hulpmiddel is <strong>gratis</strong> en mag vrij worden gedeeld,
+    uitsluitend <strong>ongewijzigd</strong> en voor
+    <strong>niet-commerciële</strong> doeleinden, met bronvermelding.</p>
+    <p>Commercieel gebruik, wijziging of verkoop is <strong>verboden</strong>
+    zonder schriftelijke toestemming. Het gebruik van naam of projecttitel
+    impliceert geen toestemming en vormt bij commercieel gebruik een
+    zelfstandige auteursrechtinbreuk.</p>
+    <p style="color:#aaa;font-size:11px">
+      This tool is free and may be shared freely, unmodified, for non-commercial
+      purposes only, with attribution. Commercial use, modification or sale is
+      prohibited.<br><br>
+      Quest'opera è gratuita e può essere condivisa liberamente, senza modifiche,
+      per scopi non commerciali, con attribuzione. L'uso commerciale è vietato.
+    </p>
+    <p style="margin-bottom:4px">
+      📧 <a href="mailto:jandenhollander@duck.com" style="color:#7eb8f7">jandenhollander@duck.com</a>
+    </p>
+    <p style="margin-top:4px;margin-bottom:0">
+      🔗 <a href="https://github.com/Jan-den-Hollander" target="_blank" style="color:#7eb8f7">github.com/Jan-den-Hollander</a>
+    </p>
+    <button onclick="document.getElementById('jdh-modal').style.display='none'"
+            style="margin-top:16px;padding:8px 20px;background:#7eb8f7;color:#000;border:none;border-radius:6px;cursor:pointer;font-weight:bold;">
+      Sluiten
+    </button>
+  </div>
+</div>
+
+<!-- ③ INTEGRITEITSCHECK -->
+<script>
+(function() {
+  'use strict';
+  var projectName = document.title || 'Onbekend project';
+  var yearEl = document.getElementById('jdh-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  var titleEl = document.getElementById('jdh-project-title');
+  if (titleEl) titleEl.textContent = projectName;
+  var modalTitleEl = document.getElementById('jdh-modal-title');
+  if (modalTitleEl) modalTitleEl.textContent = projectName;
+
+  // ── URL-check: toegestane domeinen voor RivelazioneVerde ────────────
+  var ALLOWED = [
+    'localhost',
+    '127.0.0.1',
+    'jan-den-hollander.github.io',
+    'rivelazioneVerde.vercel.app',
+    'rivelazioneVerde',      // elk *.vercel.app subdomein met deze naam
+    'claude.ai',             // voor preview in Claude artifacts
+    'stackblitz.io',
+    'stackblitz.com'
+  ];
+
+  function domainAllowed() {
+    var host = window.location.hostname.toLowerCase();
+    // Lokaal bestandssysteem (file://) altijd toegestaan
+    if (window.location.protocol === 'file:') return true;
+    // Lege hostname = Claude/sandbox preview, altijd toegestaan
+    if (!host || host === '') return true;
+    return ALLOWED.some(function(a) {
+      return host === a || host.endsWith('.' + a) || host.indexOf(a) !== -1;
+    });
+  }
+
+  function warnDomain() {
+    // Geen harde blokkering — wel een zichtbare waarschuwingsbanner
+    var banner = document.createElement('div');
+    banner.id = 'jdh-domain-warning';
+    banner.style.cssText =
+      'position:fixed;top:0;left:0;right:0;z-index:99998;' +
+      'background:#8a2010;color:#fff;font-family:sans-serif;' +
+      'font-size:12px;text-align:center;padding:8px 12px;line-height:1.5;';
+    banner.innerHTML =
+      '⚠️ <strong>' + projectName + '</strong> draait op een niet-erkend domein ' +
+      '(<em>' + window.location.hostname + '</em>). ' +
+      'Origineel: <a href="https://github.com/Jan-den-Hollander" ' +
+      'target="_blank" style="color:#ffccaa">github.com/Jan-den-Hollander</a> · ' +
+      '<a href="mailto:jandenhollander@duck.com" style="color:#ffccaa">' +
+      'jandenhollander@duck.com</a>';
+    document.body.insertBefore(banner, document.body.firstChild);
+  }
+
+  // Voer domeincheck uit na laden
+  if (!domainAllowed()) {
+    setTimeout(warnDomain, 800);
+  }
+
+  function blockApp() {
+    document.body.innerHTML = '';
+    document.body.style.cssText = 'margin:0;background:#111;display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;';
+    document.body.innerHTML =
+      '<div style="text-align:center;color:#e55;max-width:440px;padding:24px">' +
+      '<div style="font-size:52px">⛔</div>' +
+      '<h2 style="color:#e55;margin:12px 0 8px">Toegang geblokkeerd</h2>' +
+      '<p style="color:#ddd;font-size:14px">De copyright-informatie van <strong style="color:#7eb8f7">' + projectName + '</strong> is verwijderd of gewijzigd.</p>' +
+      '<p style="color:#aaa;font-size:12px">The copyright information of this application has been removed or modified.<br>La sezione copyright di questa applicazione è stata rimossa o modificata.</p>' +
+      '<hr style="border-color:#333;margin:16px 0">' +
+      '<p style="color:#ccc;font-size:13px">© Jan den Hollander</p>' +
+      '<p><a href="mailto:jandenhollander@duck.com" style="color:#7eb8f7;font-size:12px">jandenhollander@duck.com</a></p>' +
+      '<p><a href="https://github.com/Jan-den-Hollander" target="_blank" style="color:#7eb8f7;font-size:12px">🔗 github.com/Jan-den-Hollander</a></p>' +
+      '</div>';
+  }
+
+  function checkIntegrity() {
+    var footer = document.getElementById('jdh-copyright-footer');
+    var modal  = document.getElementById('jdh-modal');
+    if (!footer || !modal) { blockApp(); return; }
+    var fs = window.getComputedStyle(footer);
+    if (fs.display === 'none' || fs.visibility === 'hidden' || fs.opacity === '0') {
+      footer.style.cssText += ';display:block!important;visibility:visible!important;opacity:1!important';
+    }
+  }
+
+  checkIntegrity();
+  setInterval(checkIntegrity, 3000);
+
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      m.removedNodes.forEach(function(node) {
+        if (node.id === 'jdh-copyright-footer' || node.id === 'jdh-modal') blockApp();
+      });
+    });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+
 </body>
 </html>
