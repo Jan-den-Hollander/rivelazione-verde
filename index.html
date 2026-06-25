@@ -940,7 +940,8 @@ function mostraNot(t){var n=document.getElementById('notif');n.textContent=t;n.c
   function domainAllowed() {
     var host = window.location.hostname.toLowerCase();
     // Lokaal bestandssysteem (file://) altijd toegestaan
-    if (window.location.protocol === 'file:') return true;
+    var proto = window.location.protocol;
+    if (proto === 'file:' || proto === 'content:') return true;
     // Lege hostname = Claude/sandbox preview, altijd toegestaan
     if (!host || host === '') return true;
     return ALLOWED.some(function(a) {
